@@ -13,18 +13,27 @@ import se.wiklund.colony.Main;
 public class Mouse implements MouseListener, MouseMotionListener, MouseWheelListener {
 
 	private static double x, y;
-	private static boolean down;
 	private static List<MouseReader> readers = new CopyOnWriteArrayList<MouseReader>();
+	int pressedButton = 0;
 	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-
+		for (MouseReader reader : readers) {
+			reader.onMouseScoll(e.getWheelRotation());
+		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		double lastX = x;
+		double lastY = y;
+		
 		x = e.getX() / Main.scale;
 		y = e.getY() / Main.scale;
+		
+		for (MouseReader reader : readers) {
+			reader.onMouseDrag(pressedButton, lastX - x, lastY - y);
+		}
 	}
 
 	@Override
@@ -35,7 +44,9 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		for (MouseReader reader : readers) {
+			reader.onMouseClick(e.getButton(), (int) x, (int) y);
+		}
 	}
 
 	@Override
@@ -50,15 +61,16 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		down = true;
+		pressedButton = e.getButton();
+		for (MouseReader reader : readers) {
+			reader.onMouseDown(e.getButton(), (int) x, (int) y);
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		down = false;
-		
 		for (MouseReader reader : readers) {
-			reader.onMouseClick(e.getButton(), (int) x, (int) y);
+			reader.onMouseUp(e.getButton(), (int) x, (int) y);
 		}
 	}
 
@@ -68,10 +80,6 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 
 	public static double getY() {
 		return y;
-	}
-
-	public static boolean isDown() {
-		return down;
 	}
 	
 	public static void addMouseReader(MouseReader reader) {

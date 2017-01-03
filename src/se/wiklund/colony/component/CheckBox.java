@@ -74,4 +74,24 @@ public class CheckBox extends Component implements MouseReader {
 		double xMax = this.x + width + (label.getX() - this.x - width) + label.getWidth();
 		return x >= this.x && x <= xMax && y >= this.y && y <= this.y + height;
 	}
+
+	@Override
+	public void onMouseDown(int button, int x, int y) {
+		
+	}
+
+	@Override
+	public void onMouseDrag(int button, double deltaX, double deltaY) {
+		
+	}
+	
+	@Override
+	public void onMouseUp(int button, int x, int y) {
+		
+	}
+	
+	@Override
+	public void onMouseScoll(int amount) {
+		
+	}
 }

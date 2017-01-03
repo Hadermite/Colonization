@@ -6,16 +6,19 @@ import java.awt.image.BufferedImage;
 
 import se.wiklund.colony.Main;
 import se.wiklund.colony.State;
+import se.wiklund.colony.game.world.World;
 import se.wiklund.colony.input.Keyboard;
 import se.wiklund.colony.util.blur.GaussianFilter;
 
 public class Game extends State {
 	
+	private World world;
 	private PauseMenu pauseMenu;
 	private boolean paused, blocksMenuOpen;
 	private BufferedImage pausedBackground;
 	
 	public Game() {
+		world = new World();
 		pauseMenu = new PauseMenu(this);
 	}
 	
@@ -23,7 +26,7 @@ public class Game extends State {
 		if (paused) {
 			pauseMenu.tick();
 		} else {
-			
+			world.tick();
 		}
 		
 		if (Keyboard.isKeyPressed(KeyEvent.VK_B) && !paused) {
@@ -49,15 +52,39 @@ public class Game extends State {
 		if (paused) {
 			g.drawImage(pausedBackground, 0, 0, Main.WIDTH, Main.HEIGHT, null);
 			pauseMenu.render(g);
+		} else {
+			world.render(g);
 		}
 	}
+	
+	@Override
+	public void onMouseDown(int button, int x, int y) {
+		if (!paused) world.onMouseDown(button, x, y);
+	}
+	
+	@Override
+	public void onMouseDrag(int button, double deltaX, double deltaY) {
+		if (!paused) world.onMouseDrag(button, deltaX, deltaY);
+	}
 
+	@Override
+	public void onMouseUp(int button, int x, int y) {
+		if (!paused) world.onMouseUp(button, x, y);
+	}
+	
 	@Override
 	public void onMouseClick(int button, int x, int y) {
 		if (paused) {
 			pauseMenu.onMouseClick(button, x, y);
 		} else {
-			
+			world.onMouseClick(button, x, y);
+		}
+	}
+	
+	@Override
+	public void onMouseScoll(int amount) {
+		if (!paused) {
+			world.onMouseScoll(amount);
 		}
 	}
 	

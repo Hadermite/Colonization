@@ -67,4 +67,24 @@ public class Menu extends State {
 			}
 		}
 	}
+
+	@Override
+	public void onMouseDown(int button, int x, int y) {
+		
+	}
+
+	@Override
+	public void onMouseDrag(int button, double deltaX, double deltaY) {
+		
+	}
+	
+	@Override
+	public void onMouseUp(int button, int x, int y) {
+		
+	}
+	
+	@Override
+	public void onMouseScoll(int amount) {
+		
+	}
 }
