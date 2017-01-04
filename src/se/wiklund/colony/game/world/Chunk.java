@@ -12,9 +12,9 @@ public class Chunk {
 	private Tile[] tiles;
 	
 	public Chunk(int xPos, int yPos) {
-		this.x = xPos * SIZE;
-		this.y = yPos * SIZE;
-		bounds = new Rectangle((int) x, (int) y, SIZE, SIZE);
+		this.x = xPos * SIZE * Tile.SIZE;
+		this.y = yPos * SIZE * Tile.SIZE;
+		bounds = new Rectangle((int) x, (int) y, SIZE * Tile.SIZE, SIZE * Tile.SIZE);
 		tiles = new Tile[SIZE * SIZE];
 		
 		populateTiles();
@@ -23,7 +23,7 @@ public class Chunk {
 	private void populateTiles() {
 		for (int xPos = 0; xPos < SIZE; xPos++) {
 			for (int yPos = 0; yPos < SIZE; yPos++) {
-				tiles[xPos + yPos * SIZE] = new Tile(xPos, yPos);
+				tiles[xPos + yPos * SIZE] = new Tile((int) (x / Tile.SIZE) + xPos, (int) (y / Tile.SIZE) + yPos);
 			}
 		}
 	}
