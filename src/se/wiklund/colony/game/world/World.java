@@ -45,21 +45,21 @@ public class World {
 	public void render(Graphics2D g) {
 		screenBounds.setBounds((int) -camera.getRenderOffsetX(), (int) -camera.getRenderOffsetY(),
 				(int) (Main.WIDTH / camera.getScale()), (int) (Main.HEIGHT / camera.getScale()));
-		g.scale(camera.getScale(), camera.getScale());
-		g.translate(camera.getRenderOffsetX(), camera.getRenderOffsetY());
+		Graphics2D worldG = (Graphics2D) g.create();
+		worldG.scale(camera.getScale(), camera.getScale());
+		worldG.translate(camera.getRenderOffsetX(), camera.getRenderOffsetY());
 		for (Chunk chunk : chunks) {
 			if (chunk.getBounds().intersects(screenBounds.getBounds()))
-				chunk.render(g);
+				chunk.render(worldG);
 		}
 		Tile tile = getTileOnScreen(Mouse.getX(), Mouse.getY());
 		if (tile != null) {
-			g.drawImage(Assets.MARKER, (int) tile.getX(), (int) tile.getY(), Tile.SIZE, Tile.SIZE, null);
+			worldG.drawImage(Assets.MARKER, (int) tile.getX(), (int) tile.getY(), Tile.SIZE, Tile.SIZE, null);
 		}
-		g.translate(-camera.getRenderOffsetX(), -camera.getRenderOffsetY());
 	}
 
 	public void onMouseDown(int button, int x, int y) {
-
+		
 	}
 
 	public void onMouseDrag(int button, double deltaX, double deltaY) {
@@ -72,7 +72,7 @@ public class World {
 	}
 
 	public void onMouseUp(int button, int x, int y) {
-		// Change x and y to match scale!
+		
 	}
 
 	public void onMouseScoll(int amount) {

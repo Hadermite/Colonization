@@ -13,6 +13,7 @@ import se.wiklund.colony.util.blur.GaussianFilter;
 public class Game extends State {
 	
 	private World world;
+	private HUD hud;
 	private PauseMenu pauseMenu;
 	private boolean paused, blocksMenuOpen;
 	private BufferedImage pausedBackground;
@@ -20,6 +21,7 @@ public class Game extends State {
 	public Game() {
 		world = new World();
 		pauseMenu = new PauseMenu(this);
+		hud = new HUD();
 	}
 	
 	public void tick() {
@@ -27,6 +29,7 @@ public class Game extends State {
 			pauseMenu.tick();
 		} else {
 			world.tick();
+			hud.tick();
 		}
 		
 		if (Keyboard.isKeyPressed(KeyEvent.VK_B) && !paused) {
@@ -39,6 +42,7 @@ public class Game extends State {
 				Graphics2D g = (Graphics2D) screenshot.getGraphics();
 				
 				world.render(g);
+				hud.render(g);
 				
 				GaussianFilter blur = new GaussianFilter(5);
 				pausedBackground = blur.filter(screenshot, null);
@@ -54,6 +58,7 @@ public class Game extends State {
 			pauseMenu.render(g);
 		} else {
 			world.render(g);
+			hud.render(g);
 		}
 	}
 	
