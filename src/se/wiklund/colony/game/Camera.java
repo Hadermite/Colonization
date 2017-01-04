@@ -31,6 +31,7 @@ public class Camera {
 	
 	private void setScale(double scale) {
 		if (scale < 0.2) scale = 0.2;
+		if (scale > 8) scale = 8;
 		this.x = (int) (rawX * scale);
 		this.y = (int) (rawY * scale);
 		this.renderOffsetX = (int) (Main.WIDTH / (2 * scale) - rawX);
