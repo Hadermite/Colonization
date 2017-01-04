@@ -47,12 +47,7 @@ public class World {
 	}
 	
 	public void onMouseDown(int button, int x, int y) {
-		double worldX = WorldUtils.getWorldX(x);
-		double worldY = WorldUtils.getWorldY(y);
 		
-		if (button == 1) {
-			System.out.println(getTile(worldX, worldY).getBounds());
-		}
 	}
 
 	public void onMouseDrag(int button, double deltaX, double deltaY) {
@@ -82,7 +77,6 @@ public class World {
 				return chunk.getTile((int) (x - chunk.getX()) / Tile.SIZE, (int) (y - chunk.getY()) / Tile.SIZE);
 			}
 		}
-		System.err.println("That tile does not belong to any chunk!");
 		return null;
 	}
 	
