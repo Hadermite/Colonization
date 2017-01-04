@@ -47,7 +47,7 @@ public class PauseMenu {
 		}
 	}
 	
-	public void onMouseClick(int button, int x, int y) {
+	public void onMouseUp(int button, int x, int y) {
 		if (button != 1) return;
 		if (btnResume.containsCoord(x, y)) {
 			game.setPaused(false);

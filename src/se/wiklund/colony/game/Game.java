@@ -36,9 +36,9 @@ public class Game extends State {
 		if (Keyboard.isKeyPressed(KeyEvent.VK_ESCAPE)) {
 			if (!paused) {
 				BufferedImage screenshot = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TYPE_INT_ARGB);
-				//Graphics2D g = (Graphics2D) screenshot.getGraphics();
+				Graphics2D g = (Graphics2D) screenshot.getGraphics();
 				
-				//Render screen to screenshot
+				world.render(g);
 				
 				GaussianFilter blur = new GaussianFilter(5);
 				pausedBackground = blur.filter(screenshot, null);
@@ -69,15 +69,10 @@ public class Game extends State {
 
 	@Override
 	public void onMouseUp(int button, int x, int y) {
-		if (!paused) world.onMouseUp(button, x, y);
-	}
-	
-	@Override
-	public void onMouseClick(int button, int x, int y) {
 		if (paused) {
-			pauseMenu.onMouseClick(button, x, y);
+			pauseMenu.onMouseUp(button, x, y);
 		} else {
-			world.onMouseClick(button, x, y);
+			world.onMouseUp(button, x, y);
 		}
 	}
 	

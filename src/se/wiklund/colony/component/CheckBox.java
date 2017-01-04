@@ -56,18 +56,6 @@ public class CheckBox extends Component implements MouseReader {
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
-
-	@Override
-	public void onMouseClick(int button, int x, int y) {
-		if (button != 1) return;
-		if (containsCoord(x, y)) {
-			checked = !checked;
-			
-			for (CheckBoxListener listener : listeners) {
-				listener.onChangeValue(this, checked);
-			}
-		}
-	}
 	
 	@Override
 	public boolean containsCoord(double x, double y) {
@@ -87,7 +75,14 @@ public class CheckBox extends Component implements MouseReader {
 	
 	@Override
 	public void onMouseUp(int button, int x, int y) {
-		
+		if (button != 1) return;
+		if (containsCoord(x, y)) {
+			checked = !checked;
+			
+			for (CheckBoxListener listener : listeners) {
+				listener.onChangeValue(this, checked);
+			}
+		}
 	}
 	
 	@Override

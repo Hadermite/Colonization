@@ -63,10 +63,6 @@ public class World {
 		// Change x and y to match scale!
 	}
 
-	public void onMouseClick(int button, int x, int y) {
-		// Change x and y to match scale!
-	}
-
 	public void onMouseScoll(int amount) {
 		camera.zoom(-amount);
 	}

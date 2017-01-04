@@ -17,12 +17,13 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	int pressedButton = 0;
 	
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
+	public void mousePressed(MouseEvent e) {
+		pressedButton = e.getButton();
 		for (MouseReader reader : readers) {
-			reader.onMouseScoll(e.getWheelRotation());
+			reader.onMouseDown(e.getButton(), (int) x, (int) y);
 		}
 	}
-
+	
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		double lastX = x;
@@ -37,6 +38,20 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 
 	@Override
+	public void mouseReleased(MouseEvent e) {
+		for (MouseReader reader : readers) {
+			reader.onMouseUp(e.getButton(), (int) x, (int) y);
+		}
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		for (MouseReader reader : readers) {
+			reader.onMouseScoll(e.getWheelRotation());
+		}
+	}
+	
+	@Override
 	public void mouseMoved(MouseEvent e) {
 		x = e.getX() / Main.scale;
 		y = e.getY() / Main.scale;
@@ -44,9 +59,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for (MouseReader reader : readers) {
-			reader.onMouseClick(e.getButton(), (int) x, (int) y);
-		}
+		
 	}
 
 	@Override
@@ -57,21 +70,6 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	@Override
 	public void mouseExited(MouseEvent e) {
 
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		pressedButton = e.getButton();
-		for (MouseReader reader : readers) {
-			reader.onMouseDown(e.getButton(), (int) x, (int) y);
-		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		for (MouseReader reader : readers) {
-			reader.onMouseUp(e.getButton(), (int) x, (int) y);
-		}
 	}
 
 	public static double getX() {

@@ -59,14 +59,29 @@ public class Settings extends State {
 			component.render(g);
 		}
 	}
+	
+	@Override
+	public void onMouseDown(int button, int x, int y) {
+		
+	}
 
 	@Override
-	public void onMouseClick(int button, int x, int y) {
+	public void onMouseDrag(int button, double deltaX, double deltaY) {
+		
+	}
+	
+	@Override
+	public void onMouseUp(int button, int x, int y) {
 		if (button == 1) {
 			if (btnBack.containsCoord(x, y)) {
 				Main.setState(new Menu());
 			}
 		}
+	}
+	
+	@Override
+	public void onMouseScoll(int amount) {
+		
 	}
 	
 	class SettingsListener implements CheckBoxListener {
@@ -80,25 +95,5 @@ public class Settings extends State {
 				antiAliasing = checked;
 			}
 		}
-	}
-
-	@Override
-	public void onMouseDown(int button, int x, int y) {
-		
-	}
-
-	@Override
-	public void onMouseDrag(int button, double deltaX, double deltaY) {
-		
-	}
-	
-	@Override
-	public void onMouseUp(int button, int x, int y) {
-		
-	}
-	
-	@Override
-	public void onMouseScoll(int amount) {
-		
 	}
 }

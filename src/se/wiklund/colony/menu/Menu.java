@@ -52,22 +52,7 @@ public class Menu extends State {
 			component.render(g);
 		}
 	}
-
-	@Override
-	public void onMouseClick(int button, int x, int y) {
-		if (button == 1) {
-			if (btnPlay.containsCoord(x, y)) {
-				Main.setState(new Game());
-			}
-			if (btnSettings.containsCoord(x, y)) {
-				Main.setState(new Settings());
-			}
-			if (btnQuit.containsCoord(x, y)) {
-				System.exit(0);
-			}
-		}
-	}
-
+	
 	@Override
 	public void onMouseDown(int button, int x, int y) {
 		
@@ -80,7 +65,17 @@ public class Menu extends State {
 	
 	@Override
 	public void onMouseUp(int button, int x, int y) {
-		
+		if (button == 1) {
+			if (btnPlay.containsCoord(x, y)) {
+				Main.setState(new Game());
+			}
+			if (btnSettings.containsCoord(x, y)) {
+				Main.setState(new Settings());
+			}
+			if (btnQuit.containsCoord(x, y)) {
+				System.exit(0);
+			}
+		}
 	}
 	
 	@Override
