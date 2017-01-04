@@ -12,6 +12,7 @@ public class Assets {
 	
 	//Other Textures
 	public static final BufferedImage GROUND = Loader.loadImage("/textures/ground.png");
+	public static final BufferedImage MARKER = Loader.loadImage("/textures/marker.png");
 	
 	//Fonts
 	public static final Font FONT_SIDEBAR = Loader.loadFont("/fonts/comfortaa.ttf", 40);

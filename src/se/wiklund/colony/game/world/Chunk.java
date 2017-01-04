@@ -40,7 +40,23 @@ public class Chunk {
 		}
 	}
 	
+	public Tile getTile(int xPos, int yPos) {
+		return tiles[xPos + yPos * SIZE];
+	}
+	
 	public Rectangle getBounds() {
 		return bounds;
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public boolean containsCoord(double x, double y) {
+		return x > this.x && x < this.x + SIZE * Tile.SIZE && y > this.y && y < this.y + SIZE * Tile.SIZE;
 	}
 }
