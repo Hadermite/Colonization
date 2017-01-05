@@ -11,6 +11,7 @@ public class Assets {
 	public static final BufferedImage PLAYER = Loader.loadImage("/textures/sprites/player.png");
 	
 	//Other Textures
+	public static final BufferedImage SPLASH_SCREEN = Loader.loadImage("/textures/splash_screen.png");
 	public static final BufferedImage GROUND = Loader.loadImage("/textures/ground.png");
 	public static final BufferedImage MARKER = Loader.loadImage("/textures/marker.png");
 	
